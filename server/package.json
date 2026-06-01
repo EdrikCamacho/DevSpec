@@ -1,0 +1,28 @@
+{
+  "name": "devspec-pro-server",
+  "version": "1.0.0",
+  "description": "DevSpec Pro API Server",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "@octokit/rest": "^20.1.1",
+    "@supabase/supabase-js": "^2.43.4",
+    "archiver": "^7.0.1",
+    "axios": "^1.7.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-rate-limit": "^7.3.1",
+    "helmet": "^7.1.0",
+    "morgan": "^1.10.0",
+    "openai": "^4.52.7",
+    "uuid": "^10.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}
