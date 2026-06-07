@@ -1,0 +1,81 @@
+# ==========================
+# Variables de entorno (NUNCA subir al repo)
+# ==========================
+.env
+.env.local
+.env.development
+.env.production
+.env.staging
+.env.test
+
+# ==========================
+# Dependencias
+# ==========================
+node_modules/
+
+# ==========================
+# Logs
+# ==========================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ==========================
+# Archivos temporales / caché
+# ==========================
+.cache/
+tmp/
+temp/
+*.tmp
+*.temp
+
+# ==========================
+# Archivos generados / build
+# ==========================
+dist/
+build/
+out/
+
+# ==========================
+# Archivos comprimidos generados por el servidor
+# ==========================
+*.zip
+*.tar.gz
+*.rar
+
+# ==========================
+# Cobertura de tests
+# ==========================
+coverage/
+.nyc_output/
+
+# ==========================
+# Editor / IDE
+# ==========================
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ==========================
+# OS
+# ==========================
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# ==========================
+# Credenciales / Seguridad
+# ==========================
+*.pem
+*.key
+*.cert
+*.p12
+secrets/
