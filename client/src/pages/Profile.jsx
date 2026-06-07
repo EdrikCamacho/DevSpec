@@ -149,11 +149,12 @@ export default function Profile() {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div className="form-group">
                 <label className="label">Nombre Completo</label>
-                <div className="relative">
-                  <User className="absolute left-3 top-3.5 w-4 h-4 text-slate-400" />
+                <div style={{ position: 'relative' }}>
+                  <User size={15} strokeWidth={1.75} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)', pointerEvents: 'none' }} />
                   <input
                     type="text"
-                    className="input pl-9"
+                    className="input"
+                    style={{ paddingLeft: '2.75rem' }}
                     value={formData.full_name}
                     onChange={e => setFormData(prev => ({ ...prev, full_name: e.target.value }))}
                     placeholder="Ingresa tu nombre"
@@ -164,11 +165,12 @@ export default function Profile() {
 
               <div className="form-group">
                 <label className="label">Teléfono</label>
-                <div className="relative">
-                  <Phone className="absolute left-3 top-3.5 w-4 h-4 text-slate-400" />
+                <div style={{ position: 'relative' }}>
+                  <Phone size={15} strokeWidth={1.75} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)', pointerEvents: 'none' }} />
                   <input
                     type="text"
-                    className="input pl-9"
+                    className="input"
+                    style={{ paddingLeft: '2.75rem' }}
                     value={formData.phone}
                     onChange={e => setFormData(prev => ({ ...prev, phone: e.target.value }))}
                     placeholder="Ingresa tu teléfono"
@@ -178,11 +180,12 @@ export default function Profile() {
 
               <div className="form-group">
                 <label className="label">Ciudad</label>
-                <div className="relative">
-                  <MapPin className="absolute left-3 top-3.5 w-4 h-4 text-slate-400" />
+                <div style={{ position: 'relative' }}>
+                  <MapPin size={15} strokeWidth={1.75} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)', pointerEvents: 'none' }} />
                   <input
                     type="text"
-                    className="input pl-9"
+                    className="input"
+                    style={{ paddingLeft: '2.75rem' }}
                     value={formData.city}
                     onChange={e => setFormData(prev => ({ ...prev, city: e.target.value }))}
                     placeholder="Ej. Madrid, CDMX"
@@ -192,11 +195,12 @@ export default function Profile() {
 
               <div className="form-group">
                 <label className="label">Usuario GitHub</label>
-                <div className="relative">
-                  <GitBranch className="absolute left-3 top-3.5 w-4 h-4 text-slate-400" />
+                <div style={{ position: 'relative' }}>
+                  <GitBranch size={15} strokeWidth={1.75} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)', pointerEvents: 'none' }} />
                   <input
                     type="text"
-                    className="input pl-9"
+                    className="input"
+                    style={{ paddingLeft: '2.75rem' }}
                     value={formData.github_username}
                     onChange={e => setFormData(prev => ({ ...prev, github_username: e.target.value }))}
                     placeholder="Usuario de GitHub"
@@ -207,16 +211,17 @@ export default function Profile() {
 
             <div className="form-group">
               <label className="label">Habilidades (Separadas por comas)</label>
-              <div className="relative">
-                <Code className="absolute left-3 top-3.5 w-4 h-4 text-slate-400" />
-                <input
-                  type="text"
-                  className="input pl-9"
-                  value={formData.skills}
-                  onChange={e => setFormData(prev => ({ ...prev, skills: e.target.value }))}
-                  placeholder="React, Express, PostgreSQL, Figma, UI Design"
-                />
-              </div>
+                <div style={{ position: 'relative' }}>
+                  <Code size={15} strokeWidth={1.75} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)', pointerEvents: 'none' }} />
+                  <input
+                    type="text"
+                    className="input"
+                    style={{ paddingLeft: '2.75rem' }}
+                    value={formData.skills}
+                    onChange={e => setFormData(prev => ({ ...prev, skills: e.target.value }))}
+                    placeholder="React, Express, PostgreSQL, Figma, UI Design"
+                  />
+                </div>
               <p className="text-xs text-slate-500 mt-1">Ingresa tus aptitudes técnicas separadas por comas para que tu equipo pueda verlas.</p>
             </div>
 

@@ -152,7 +152,7 @@ export default function Team({ project }) {
                 <Mail className="absolute left-3 top-3.5 w-4 h-4 text-slate-400" />
                 <input
                   type="email"
-                  className="input pl-9"
+                  className="input pl-11"
                   placeholder="colaborador@correo.com"
                   value={email}
                   onChange={e => setEmail(e.target.value)}

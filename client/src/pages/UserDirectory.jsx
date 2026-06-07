@@ -59,7 +59,7 @@ export default function UserDirectory() {
           <Search className="absolute left-3 top-3.5 w-4 h-4 text-slate-400" />
           <input
             type="text"
-            className="input pl-9"
+            className="input pl-11"
             placeholder="Buscar por nombre, correo, habilidades..."
             value={search}
             onChange={e => setSearch(e.target.value)}
@@ -71,7 +71,7 @@ export default function UserDirectory() {
             <MapPin className="absolute left-3 top-3.5 w-4 h-4 text-slate-400" />
             <input
               type="text"
-              className="input pl-9"
+              className="input pl-11"
               placeholder="Ciudad..."
               value={city}
               onChange={e => setCity(e.target.value)}

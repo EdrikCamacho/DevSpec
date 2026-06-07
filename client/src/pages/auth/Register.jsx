@@ -5,7 +5,7 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useAuth } from '../../contexts/AuthContext'
 import toast from 'react-hot-toast'
-import { Eye, EyeOff, Mail, Lock, User, Phone, MapPin, ArrowRight } from 'lucide-react'
+import { Eye, EyeOff, ArrowRight } from 'lucide-react'
 import { motion } from 'framer-motion'
 
 const schema = z.object({
@@ -20,14 +20,11 @@ const schema = z.object({
   path: ['confirm'],
 })
 
-function Field({ label, icon: Icon, error, children }) {
+function Field({ id, label, error, children, style }) {
   return (
-    <div className="form-group">
-      <label className="label">{label}</label>
-      <div style={{ position: 'relative' }}>
-        {Icon && <Icon size={16} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />}
-        {children}
-      </div>
+    <div className="form-group" style={style}>
+      {label && <label className="label" htmlFor={id}>{label}</label>}
+      {children}
       {error && <span className="error-msg">{error}</span>}
     </div>
   )
@@ -59,65 +56,179 @@ export default function Register() {
   return (
     <div className="auth-bg">
       <motion.div
-        initial={{ opacity: 0, y: 24 }}
+        initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
-        style={{ width: '100%', maxWidth: 460 }}
+        transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+        style={{ width: '100%', maxWidth: 480, position: 'relative', zIndex: 1 }}
       >
-        <div style={{ textAlign: 'center', marginBottom: '1.75rem' }}>
-          <div style={{
-            width: 56, height: 56, borderRadius: 16, background: 'var(--purple)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            margin: '0 auto 1rem', boxShadow: '0 0 30px var(--purple-glow)',
-          }}>
-            <span style={{ color: 'white', fontWeight: 900, fontSize: '1.5rem' }}>D</span>
+        {/* Header */}
+        <div style={{ marginBottom: '2rem' }}>
+          {/* Wordmark */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem', marginBottom: '2rem' }}>
+            <div style={{
+              width: 32, height: 32, borderRadius: 7,
+              background: 'var(--bg-surface)',
+              border: '1px solid var(--border)',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}>
+              <span style={{
+                fontFamily: 'var(--font-mono)',
+                fontWeight: 500,
+                fontSize: '0.75rem',
+                color: 'var(--accent)',
+              }}>D/</span>
+            </div>
+            <span style={{
+              fontFamily: 'var(--font-serif)',
+              fontWeight: 700,
+              fontSize: '1rem',
+              color: 'var(--text-primary)',
+            }}>
+              DevSpec<em style={{ color: 'var(--accent)', fontStyle: 'italic' }}> Pro</em>
+            </span>
           </div>
-          <h1 style={{ fontSize: '1.75rem', fontWeight: 800, marginBottom: '0.25rem' }}>
-            Crear cuenta en <span className="gradient-text">DevSpec Pro</span>
+
+          <h1 style={{
+            fontFamily: 'var(--font-serif)',
+            fontSize: '1.625rem',
+            fontWeight: 700,
+            color: 'var(--text-primary)',
+            lineHeight: 1.2,
+            marginBottom: '0.5rem',
+          }}>
+            Crea tu cuenta
           </h1>
-          <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem' }}>Comienza a gestionar tus proyectos con IA</p>
+          <p style={{ color: 'var(--text-secondary)', fontSize: '0.875rem' }}>
+            Únete y empieza a gestionar tus proyectos con IA
+          </p>
         </div>
 
-        <div className="card" style={{ boxShadow: '0 8px 40px rgba(0,0,0,0.4)' }}>
-          <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-              <Field label="Nombre completo" icon={User} error={errors.full_name?.message}>
-                <input {...register('full_name')} className={`input ${errors.full_name ? 'error' : ''}`} style={{ paddingLeft: 36 }} placeholder="Juan Pérez" />
-              </Field>
-              <Field label="Ciudad" icon={MapPin} error={errors.city?.message}>
-                <input {...register('city')} className={`input ${errors.city ? 'error' : ''}`} style={{ paddingLeft: 36 }} placeholder="Ciudad de México" />
-              </Field>
-            </div>
+        {/* Form card */}
+        <div className="auth-card">
+          <form onSubmit={handleSubmit(onSubmit)} style={{ display: 'flex', flexDirection: 'column', gap: '1.125rem' }}>
 
-            <Field label="Correo electrónico" icon={Mail} error={errors.email?.message}>
-              <input {...register('email')} type="email" className={`input ${errors.email ? 'error' : ''}`} style={{ paddingLeft: 36 }} placeholder="tu@email.com" />
-            </Field>
-
-            <Field label="Teléfono (opcional)" icon={Phone} error={errors.phone?.message}>
-              <input {...register('phone')} type="tel" className="input" style={{ paddingLeft: 36 }} placeholder="+52 555 000 0000" />
-            </Field>
-
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
-              <Field label="Contraseña" icon={Lock} error={errors.password?.message}>
-                <input {...register('password')} type={showPass ? 'text' : 'password'} className={`input ${errors.password ? 'error' : ''}`} style={{ paddingLeft: 36, paddingRight: 36 }} placeholder="••••••••" />
-                <button type="button" onClick={() => setShowPass(p => !p)} style={{ position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)' }}>
-                  {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
-                </button>
+            {/* Row: nombre + ciudad */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.875rem' }}>
+              <Field id="reg-name" label="Nombre completo" error={errors.full_name?.message}>
+                <input
+                  id="reg-name"
+                  {...register('full_name')}
+                  className={`input ${errors.full_name ? 'error' : ''}`}
+                  placeholder="Juan Pérez"
+                  autoComplete="name"
+                />
               </Field>
-              <Field label="Confirmar contraseña" icon={Lock} error={errors.confirm?.message}>
-                <input {...register('confirm')} type={showPass ? 'text' : 'password'} className={`input ${errors.confirm ? 'error' : ''}`} style={{ paddingLeft: 36 }} placeholder="••••••••" />
+              <Field id="reg-city" label="Ciudad" error={errors.city?.message}>
+                <input
+                  id="reg-city"
+                  {...register('city')}
+                  className={`input ${errors.city ? 'error' : ''}`}
+                  placeholder="Ciudad de México"
+                />
               </Field>
             </div>
 
-            <button type="submit" className="btn btn-primary btn-lg" disabled={loading} style={{ width: '100%', justifyContent: 'center', marginTop: '0.5rem' }}>
-              {loading ? <><div className="spinner" /> Creando cuenta…</> : <>Crear cuenta <ArrowRight size={16} /></>}
+            {/* Email */}
+            <Field id="reg-email" label="Correo electrónico" error={errors.email?.message}>
+              <input
+                id="reg-email"
+                {...register('email')}
+                type="email"
+                className={`input ${errors.email ? 'error' : ''}`}
+                placeholder="tu@email.com"
+                autoComplete="email"
+              />
+            </Field>
+
+            {/* Teléfono */}
+            <Field id="reg-phone" label="Teléfono — opcional" error={errors.phone?.message}>
+              <input
+                id="reg-phone"
+                {...register('phone')}
+                type="tel"
+                className="input"
+                placeholder="+52 555 000 0000"
+                autoComplete="tel"
+              />
+            </Field>
+
+            {/* Divider visual */}
+            <div style={{
+              display: 'flex', alignItems: 'center', gap: '0.75rem',
+              margin: '0.25rem 0',
+            }}>
+              <div style={{ flex: 1, height: 1, background: 'var(--border)' }} />
+              <span className="section-label">Seguridad</span>
+              <div style={{ flex: 1, height: 1, background: 'var(--border)' }} />
+            </div>
+
+            {/* Row: contraseñas */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.875rem' }}>
+              <Field id="reg-pass" label="Contraseña" error={errors.password?.message}>
+                <div style={{ position: 'relative' }}>
+                  <input
+                    id="reg-pass"
+                    {...register('password')}
+                    type={showPass ? 'text' : 'password'}
+                    className={`input ${errors.password ? 'error' : ''}`}
+                    style={{ paddingRight: '2.75rem' }}
+                    placeholder="••••••••"
+                    autoComplete="new-password"
+                  />
+                  <button
+                    type="button"
+                    id="toggle-pass-register"
+                    onClick={() => setShowPass(p => !p)}
+                    style={{
+                      position: 'absolute', right: 10, top: '50%', transform: 'translateY(-50%)',
+                      background: 'none', border: 'none', cursor: 'pointer',
+                      color: 'var(--text-muted)', padding: '0.25rem',
+                      display: 'flex', alignItems: 'center',
+                    }}
+                  >
+                    {showPass ? <EyeOff size={13} strokeWidth={1.75} /> : <Eye size={13} strokeWidth={1.75} />}
+                  </button>
+                </div>
+              </Field>
+
+              <Field id="reg-confirm" label="Confirmar" error={errors.confirm?.message}>
+                <input
+                  id="reg-confirm"
+                  {...register('confirm')}
+                  type={showPass ? 'text' : 'password'}
+                  className={`input ${errors.confirm ? 'error' : ''}`}
+                  placeholder="••••••••"
+                  autoComplete="new-password"
+                />
+              </Field>
+            </div>
+
+            {/* Submit */}
+            <button
+              id="register-submit-btn"
+              type="submit"
+              className="btn btn-primary btn-lg"
+              disabled={loading}
+              style={{ width: '100%', justifyContent: 'center', marginTop: '0.5rem' }}
+            >
+              {loading
+                ? <><div className="spinner" style={{ borderTopColor: '#0D1117' }} /> Creando cuenta…</>
+                : <>Crear cuenta <ArrowRight size={15} strokeWidth={2} /></>
+              }
             </button>
           </form>
         </div>
 
-        <p style={{ textAlign: 'center', marginTop: '1.5rem', color: 'var(--text-secondary)', fontSize: '0.875rem' }}>
+        {/* Footer */}
+        <p style={{
+          textAlign: 'center',
+          marginTop: '1.5rem',
+          fontFamily: 'var(--font-mono)',
+          fontSize: '0.75rem',
+          color: 'var(--text-muted)',
+        }}>
           ¿Ya tienes cuenta?{' '}
-          <Link to="/login" style={{ color: 'var(--purple-light)', textDecoration: 'none', fontWeight: 600 }}>
+          <Link to="/login" style={{ color: 'var(--accent)', fontWeight: 500 }}>
             Iniciar sesión
           </Link>
         </p>

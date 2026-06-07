@@ -50,7 +50,7 @@ export default function ForgotPassword() {
                 <label className="label">Correo electrónico</label>
                 <div style={{ position: 'relative' }}>
                   <Mail size={16} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
-                  <input type="email" className="input" style={{ paddingLeft: 36 }} placeholder="tu@email.com" value={email} onChange={e => setEmail(e.target.value)} required />
+                  <input type="email" className="input" style={{ paddingLeft: '2.75rem' }} placeholder="tu@email.com" value={email} onChange={e => setEmail(e.target.value)} required />
                 </div>
               </div>
               <button type="submit" className="btn btn-primary btn-lg" disabled={loading} style={{ width: '100%', justifyContent: 'center' }}>

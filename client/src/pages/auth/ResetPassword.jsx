@@ -44,7 +44,7 @@ export default function ResetPassword() {
                 <label className="label">{label}</label>
                 <div style={{ position: 'relative' }}>
                   <Lock size={16} style={{ position: 'absolute', left: 12, top: '50%', transform: 'translateY(-50%)', color: 'var(--text-muted)' }} />
-                  <input type="password" className="input" style={{ paddingLeft: 36 }} value={val} onChange={e => setter(e.target.value)} placeholder="••••••••" required minLength={8} />
+                  <input type="password" className="input" style={{ paddingLeft: '2.75rem' }} value={val} onChange={e => setter(e.target.value)} placeholder="••••••••" required minLength={8} />
                 </div>
               </div>
             ))}
